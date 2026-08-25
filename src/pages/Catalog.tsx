@@ -41,7 +41,7 @@ export function Catalog() {
   const itemsPerPage = 6;
   
   const { addToCart } = useCart();
-  const { toggleFavorite } = useFavorites();
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   // 3. Derived State: Filtered and Sorted Products
   const filteredProducts = useMemo(() => {
@@ -397,9 +397,9 @@ export function Catalog() {
                   <article key={product.id} className="group flex flex-col bg-surface-container-lowest rounded-[20px] md:rounded-[24px] border border-outline-variant/30 overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 relative">
                     <button 
                       onClick={(e) => handleToggleFavorite(e, product.id)}
-                      className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center bg-surface/80 backdrop-blur-sm rounded-full text-on-surface-variant hover:text-error hover:bg-surface transition-colors shadow-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transform md:translate-y-1 md:group-hover:translate-y-0 duration-300"
+                      className={`absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center bg-surface/80 backdrop-blur-sm rounded-full hover:bg-surface transition-colors shadow-sm transform md:translate-y-1 md:group-hover:translate-y-0 duration-300 ${isFavorite(product.id) ? 'text-error opacity-100' : 'text-on-surface-variant hover:text-error opacity-100 md:opacity-0 md:group-hover:opacity-100'}`}
                     >
-                      <span className="material-symbols-outlined text-[18px]">favorite</span>
+                      <span className="material-symbols-outlined text-[18px]" style={isFavorite(product.id) ? {fontVariationSettings: "'FILL' 1"} : {}}>favorite</span>
                     </button>
                     <Link to={`/produit/${product.id}`} className="relative w-full aspect-square overflow-hidden bg-surface-container-low block">
                       <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={product.name} src={product.image}/>
