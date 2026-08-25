@@ -1,10 +1,14 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 
 import { PRODUCTS, CATEGORIES } from '../data/products';
 
 export function Catalog() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get('q') || '';
+  
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
   
@@ -47,6 +51,16 @@ export function Catalog() {
   const filteredProducts = useMemo(() => {
     let result = [...PRODUCTS];
 
+    // Filter by search query
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(p => 
+        p.name.toLowerCase().includes(q) || 
+        (p.description && p.description.toLowerCase().includes(q)) ||
+        p.seller.toLowerCase().includes(q)
+      );
+    }
+
     // Filter by categories
     if (selectedCategories.length > 0) {
       result = result.filter(p => selectedCategories.includes(p.category));
@@ -83,12 +97,12 @@ export function Catalog() {
     }
 
     return result;
-  }, [selectedCategories, minPrice, maxPrice, onlyVerified, minRating, sortBy, onlyPromo]);
+  }, [selectedCategories, minPrice, maxPrice, onlyVerified, minRating, sortBy, onlyPromo, searchQuery]);
 
   // Reset pagination when filters change
   useMemo(() => {
     setCurrentPage(1);
-  }, [selectedCategories, minPrice, maxPrice, onlyVerified, minRating, sortBy, onlyPromo]);
+  }, [selectedCategories, minPrice, maxPrice, onlyVerified, minRating, sortBy, onlyPromo, searchQuery]);
 
   // Paginated products
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
@@ -108,6 +122,10 @@ export function Catalog() {
     setOnlyVerified(false);
     setMinRating(null);
     setOnlyPromo(false);
+    // Remove search params from URL
+    if (searchQuery) {
+      navigate('/catalogue', { replace: true });
+    }
   };
 
   const handleAddToCart = (e: React.MouseEvent, productName: string) => {
@@ -150,10 +168,12 @@ export function Catalog() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-outline-variant/30 pb-6">
           <div className="flex flex-col gap-2">
             <h1 className="font-display-lg-mobile md:font-display-lg text-on-surface tracking-tight">
-              Tout le catalogue
+              {searchQuery ? `Résultats pour "${searchQuery}"` : 'Tout le catalogue'}
             </h1>
             <p className="font-body-lg text-on-surface-variant max-w-2xl">
-              Découvrez des milliers de produits locaux et authentiques, vérifiés pour votre sécurité.
+              {searchQuery 
+                ? `Découvrez les produits et vendeurs correspondant à votre recherche.` 
+                : `Découvrez des milliers de produits locaux et authentiques, vérifiés pour votre sécurité.`}
             </p>
           </div>
           {/* Sorting & Actions */}

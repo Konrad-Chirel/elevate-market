@@ -1,16 +1,28 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useFavorites } from '../../context/FavoritesContext';
 
 export function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { totalArticles } = useCart();
   const { favorites } = useFavorites();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   
   const currentCategory = location.pathname === '/catalogue' ? location.state?.category : null;
   const isPromoActive = location.pathname === '/catalogue' && location.state?.isPromo;
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/catalogue?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
+      setIsMobileSearchOpen(false);
+    }
+  };
 
   const getLinkClass = (category: string) => {
     const isActive = currentCategory === category;
@@ -57,18 +69,31 @@ export function Header() {
           </div>
           <span className="font-headline-md text-lg md:text-xl font-bold text-on-surface tracking-wide">Elevate<span className="text-primary">.</span></span>
         </Link>
-        <div className="hidden md:block flex-1 max-w-2xl relative mx-gutter">
-          <input className="w-full h-11 bg-surface-container-low border-none rounded-full pl-12 pr-4 text-body-sm focus:ring-2 focus:ring-primary outline-none" placeholder="Rechercher des produits, des vendeurs..." type="text"/>
-          <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-        </div>
+        
+        <form onSubmit={handleSearch} className="hidden md:block flex-1 max-w-2xl relative mx-gutter">
+          <input 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full h-11 bg-surface-container-low border-none rounded-full pl-12 pr-4 text-body-sm focus:ring-2 focus:ring-primary outline-none" 
+            placeholder="Rechercher des produits, des vendeurs..." 
+            type="text"
+          />
+          <button type="submit" className="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant flex items-center justify-center hover:text-primary transition-colors">
+            <span className="material-symbols-outlined">search</span>
+          </button>
+        </form>
+        
         <nav className="hidden xl:flex items-center gap-6">
           <Link to="/catalogue" className={getMainNavClass('/catalogue')}>Acheter</Link>
           <Link to="/devenir-vendeur" className={getMainNavClass('/devenir-vendeur')}>Vendre</Link>
           <Link to="/aide" className={getMainNavClass('/aide')}>Aide</Link>
         </nav>
         <div className="flex items-center gap-2 md:gap-4 ml-auto">
-          <button className="md:hidden w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
-            <span className="material-symbols-outlined text-[20px]">search</span>
+          <button 
+            onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+            className="md:hidden w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors focus:outline-none"
+          >
+            <span className="material-symbols-outlined text-[20px]">{isMobileSearchOpen ? 'close' : 'search'}</span>
           </button>
           <Link to="/suivi-commande" className="hidden sm:flex p-2 text-on-surface-variant hover:text-primary relative" title="Suivi de commande">
             <span className="material-symbols-outlined">local_shipping</span>
@@ -101,6 +126,25 @@ export function Header() {
           </Link>
         </div>
       </div>
+      
+      {/* Mobile Search Bar */}
+      {isMobileSearchOpen && (
+        <div className="md:hidden w-full px-4 py-3 bg-surface border-b border-outline-variant/30">
+          <form onSubmit={handleSearch} className="relative w-full">
+            <input 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full h-11 bg-surface-container-low border border-outline-variant/50 rounded-full pl-12 pr-4 text-body-sm focus:ring-2 focus:ring-primary outline-none" 
+              placeholder="Rechercher des produits..." 
+              type="text"
+              autoFocus
+            />
+            <button type="submit" className="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant flex items-center justify-center">
+              <span className="material-symbols-outlined text-[20px]">search</span>
+            </button>
+          </form>
+        </div>
+      )}
       
       {/* Mobile Dropdown Menu */}
       {isMobileMenuOpen && (
