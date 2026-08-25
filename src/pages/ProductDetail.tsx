@@ -194,12 +194,12 @@ export function ProductDetail() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3 w-full sm:w-auto">
-            <Link to={`/boutique/${product.sellerSlug}`} className="flex-1 sm:flex-none text-center bg-white border border-outline-variant text-on-surface font-label-bold px-6 py-2.5 rounded-full hover:bg-surface-variant transition-colors shadow-sm">
+          <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            <Link to={`/boutique/${product.sellerSlug}`} className="flex-1 sm:flex-none text-center bg-white border border-outline-variant text-on-surface text-[13px] sm:text-sm font-label-bold px-3 sm:px-6 py-2.5 rounded-full hover:bg-surface-variant transition-colors shadow-sm whitespace-nowrap">
               Visiter la boutique
             </Link>
-            <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-secondary text-white font-label-bold px-6 py-2.5 rounded-full hover:bg-secondary/90 transition-colors shadow-sm">
-              <span className="material-symbols-outlined text-[18px]">chat</span>
+            <button className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 sm:gap-2 bg-secondary text-white text-[13px] sm:text-sm font-label-bold px-3 sm:px-6 py-2.5 rounded-full hover:bg-secondary/90 transition-colors shadow-sm whitespace-nowrap">
+              <span className="material-symbols-outlined text-[16px] sm:text-[18px]">chat</span>
               Contacter
             </button>
           </div>
