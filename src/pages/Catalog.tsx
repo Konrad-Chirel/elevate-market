@@ -2,6 +2,8 @@ import { useState, useMemo, useEffect } from 'react';
 import { Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 
 import { PRODUCTS, CATEGORIES } from '../data/products';
+import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
 
 export function Catalog() {
   const location = useLocation();
@@ -125,7 +127,16 @@ export function Catalog() {
   const handleAddToCart = (e: React.MouseEvent, product: typeof PRODUCTS[0]) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(product);
+    addToCart({
+      id: product.id,
+      name: product.name,
+      seller: product.seller,
+      sellerSlug: product.seller.toLowerCase().replace(/\s+/g, '-'),
+      price: product.price,
+      image: product.image,
+      isVerified: !!product.isVerified,
+      outOfStock: false
+    });
   };
 
   const handleToggleFavorite = (e: React.MouseEvent, productId: number) => {
