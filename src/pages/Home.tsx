@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
 
@@ -129,37 +129,37 @@ export function Home() {
           </a>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          <Link to="/catalogue" className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
+          <Link to="/catalogue" state={{ category: "Mode" }} className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
             <div className="w-16 h-16 rounded-2xl bg-primary/10 shadow-sm flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary group-hover:scale-110 transition-all duration-300">
               <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1"}}>checkroom</span>
             </div>
             <span className="font-title-lg text-sm font-bold text-on-surface group-hover:text-primary transition-colors">Mode</span>
           </Link>
-          <Link to="/catalogue" className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
+          <Link to="/catalogue" state={{ category: "Électronique" }} className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
             <div className="w-16 h-16 rounded-2xl bg-secondary/10 shadow-sm flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-on-secondary group-hover:scale-110 transition-all duration-300">
               <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1"}}>devices</span>
             </div>
-            <span className="font-title-lg text-sm font-bold text-on-surface group-hover:text-secondary transition-colors">àâ€°lectronique</span>
+            <span className="font-title-lg text-sm font-bold text-on-surface group-hover:text-secondary transition-colors">Électronique</span>
           </Link>
-          <Link to="/catalogue" className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
+          <Link to="/catalogue" state={{ category: "Maison" }} className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
             <div className="w-16 h-16 rounded-2xl bg-tertiary/10 shadow-sm flex items-center justify-center text-tertiary group-hover:bg-tertiary group-hover:text-on-tertiary group-hover:scale-110 transition-all duration-300">
               <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1"}}>chair</span>
             </div>
             <span className="font-title-lg text-sm font-bold text-on-surface group-hover:text-tertiary transition-colors">Maison</span>
           </Link>
-          <Link to="/catalogue" className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
+          <Link to="/catalogue" state={{ category: "Beauté" }} className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
             <div className="w-16 h-16 rounded-2xl bg-rose-500/10 shadow-sm flex items-center justify-center text-rose-500 group-hover:bg-rose-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
               <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1"}}>face_retouching_natural</span>
             </div>
-            <span className="font-title-lg text-sm font-bold text-on-surface group-hover:text-rose-500 transition-colors">Beautéé</span>
+            <span className="font-title-lg text-sm font-bold text-on-surface group-hover:text-rose-500 transition-colors">Beauté</span>
           </Link>
-          <Link to="/catalogue" className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
+          <Link to="/catalogue" state={{ category: "Alimentation" }} className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
             <div className="w-16 h-16 rounded-2xl bg-amber-500/10 shadow-sm flex items-center justify-center text-amber-500 group-hover:bg-amber-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
               <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1"}}>local_dining</span>
             </div>
             <span className="font-title-lg text-sm font-bold text-on-surface group-hover:text-amber-500 transition-colors">Alimentation</span>
           </Link>
-          <Link to="/catalogue" className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
+          <Link to="/catalogue" state={{ category: "Artisanat" }} className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
             <div className="w-16 h-16 rounded-2xl bg-indigo-500/10 shadow-sm flex items-center justify-center text-indigo-500 group-hover:bg-indigo-500 group-hover:text-white group-hover:scale-110 transition-all duration-300">
               <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1"}}>palette</span>
             </div>
