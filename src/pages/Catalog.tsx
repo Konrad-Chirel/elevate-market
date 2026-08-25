@@ -38,14 +38,8 @@ export function Catalog() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 6;
   
-  // Toast state
-  const [toast, setToast] = useState<{message: string, type: 'success' | 'info'} | null>(null);
-
-  // Helper to show toast
-  const showToast = (message: string, type: 'success' | 'info' = 'success') => {
-    setToast({ message, type });
-    setTimeout(() => setToast(null), 3000);
-  };
+  const { addToCart } = useCart();
+  const { toggleFavorite } = useFavorites();
 
   // 3. Derived State: Filtered and Sorted Products
   const filteredProducts = useMemo(() => {
@@ -128,16 +122,16 @@ export function Catalog() {
     }
   };
 
-  const handleAddToCart = (e: React.MouseEvent, productName: string) => {
+  const handleAddToCart = (e: React.MouseEvent, product: typeof PRODUCTS[0]) => {
     e.preventDefault();
     e.stopPropagation();
-    showToast(`"${productName}" ajouté au panier`, 'success');
+    addToCart(product);
   };
 
-  const handleToggleFavorite = (e: React.MouseEvent, productName: string) => {
+  const handleToggleFavorite = (e: React.MouseEvent, productId: number) => {
     e.preventDefault();
     e.stopPropagation();
-    showToast(`"${productName}" ajouté aux favoris`, 'info');
+    toggleFavorite(productId);
   };
 
   const sortLabels: Record<string, string> = {
@@ -149,19 +143,6 @@ export function Catalog() {
 
   return (
     <div className="flex flex-col w-full relative">
-      {/* Toast Notification */}
-      {toast && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className={`flex items-center gap-3 px-6 py-3 rounded-full shadow-lg ${
-            toast.type === 'success' ? 'bg-primary text-white' : 'bg-surface-container-highest text-on-surface'
-          }`}>
-            <span className="material-symbols-outlined text-[20px]">
-              {toast.type === 'success' ? 'check_circle' : 'info'}
-            </span>
-            <span className="font-label-bold text-sm">{toast.message}</span>
-          </div>
-        </div>
-      )}
 
       {/* Page Header */}
       <div className="w-full max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop py-8 md:py-12">
@@ -404,7 +385,7 @@ export function Catalog() {
                 {paginatedProducts.map((product) => (
                   <article key={product.id} className="group flex flex-col bg-surface-container-lowest rounded-[20px] md:rounded-[24px] border border-outline-variant/30 overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 relative">
                     <button 
-                      onClick={(e) => handleToggleFavorite(e, product.name)}
+                      onClick={(e) => handleToggleFavorite(e, product.id)}
                       className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center bg-surface/80 backdrop-blur-sm rounded-full text-on-surface-variant hover:text-error hover:bg-surface transition-colors shadow-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transform md:translate-y-1 md:group-hover:translate-y-0 duration-300"
                     >
                       <span className="material-symbols-outlined text-[18px]">favorite</span>
@@ -432,7 +413,7 @@ export function Catalog() {
                           </span>
                         </div>
                         <button 
-                          onClick={(e) => handleAddToCart(e, product.name)}
+                          onClick={(e) => handleAddToCart(e, product)}
                           className="w-8 h-8 md:w-10 md:h-10 shrink-0 flex items-center justify-center bg-surface-container-high text-on-surface rounded-lg md:rounded-xl hover:bg-primary hover:text-white transition-colors shadow-sm hover:shadow-md hover:scale-105"
                         >
                           <span className="material-symbols-outlined text-[16px] md:text-[20px]">shopping_bag</span>

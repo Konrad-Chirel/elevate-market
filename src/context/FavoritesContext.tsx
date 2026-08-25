@@ -1,4 +1,4 @@
-﻿import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 import { useToast } from './ToastContext';
 
 interface FavoritesContextType {
@@ -15,7 +15,7 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
 
   const toggleFavorite = (id: number) => {
     if (favorites.includes(id)) {
-      showToast('Retiré de vos favoris', 'error');
+      showToast('Retiré de vos favoris', 'info');
       setFavorites(prev => prev.filter(favId => favId !== id));
     } else {
       showToast('Ajouté à vos favoris', 'success');
