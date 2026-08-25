@@ -5,15 +5,15 @@ export function Auth() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="flex flex-col w-full h-full justify-center items-center py-24 relative overflow-hidden bg-surface-bright min-h-screen">
+    <div className="flex flex-col w-full justify-center items-center pt-8 pb-16 lg:py-24 relative overflow-hidden bg-surface-bright min-h-[calc(100vh-80px)]">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary-container/10 rounded-full blur-[100px] mix-blend-multiply"></div>
         <div className="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container/10 rounded-full blur-[80px] mix-blend-multiply"></div>
       </div>
       
-      <div className="w-full max-w-6xl mx-auto px-margin-mobile lg:px-margin-desktop relative z-10 flex flex-col lg:flex-row gap-16 items-center">
+      <div className="w-full max-w-6xl mx-auto px-margin-mobile lg:px-margin-desktop relative z-10 flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
         {/* Left Side: Visual & Value Prop */}
-        <div className="flex-1 w-full space-y-8 animate-fade-in-up">
+        <div className="flex-1 w-full space-y-6 lg:space-y-8 animate-fade-in-up">
           <div className="space-y-4">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high text-primary font-label-bold text-label-bold uppercase tracking-wider">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
