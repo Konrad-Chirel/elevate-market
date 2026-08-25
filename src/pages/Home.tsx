@@ -124,9 +124,6 @@ export function Home() {
             <h2 className="font-headline-md text-on-surface mb-2">Explorez par Catégorie</h2>
             <p className="font-body-sm text-on-surface-variant">Trouvez exactement ce que vous cherchez parmi nos vendeurs certifiés.</p>
           </div>
-          <a className="hidden md:flex items-center gap-1 font-label-bold text-primary hover:text-surface-tint transition-colors uppercase tracking-wide text-sm" href="#">
-            Voir tout <span className="material-symbols-outlined text-sm">chevron_right</span>
-          </a>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           <Link to="/catalogue" state={{ category: "Mode" }} className="group flex flex-col items-center p-6 rounded-3xl bg-surface shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/20 text-center gap-4">
@@ -170,9 +167,14 @@ export function Home() {
 
       {/* Featured Products Grid */}
       <section className="py-12 bg-surface-container-lowest max-w-container-max mx-auto px-margin-mobile lg:px-margin-desktop w-full">
-        <div className="flex items-center gap-4 mb-10">
-          <div className="w-2 h-8 bg-secondary rounded-full"></div>
-          <h2 className="font-headline-md text-on-surface">Sélection du Jour</h2>
+        <div className="flex items-center justify-between mb-10">
+          <div className="flex items-center gap-4">
+            <div className="w-2 h-8 bg-secondary rounded-full"></div>
+            <h2 className="font-headline-md text-on-surface">Sélection du Jour</h2>
+          </div>
+          <Link to="/catalogue" className="flex items-center gap-1 font-label-bold text-primary hover:text-surface-tint transition-colors uppercase tracking-wide text-sm">
+            Voir tout <span className="material-symbols-outlined text-sm">chevron_right</span>
+          </Link>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-6 sm:gap-x-4 sm:gap-y-10 lg:gap-x-6 lg:gap-y-12">
           {/* Product 1 */}
