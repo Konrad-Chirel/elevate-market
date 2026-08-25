@@ -227,7 +227,7 @@ export function Catalog() {
             
             {/* Categories */}
             <div className="mb-8">
-              <h3 className="font-label-bold uppercase text-on-surface-variant mb-4 tracking-wider">Catégories</h3>
+              <h3 className="text-sm font-bold text-on-surface mb-3 uppercase tracking-wide">Catégories</h3>
               <div className="flex flex-col gap-3">
                 {CATEGORIES.map((cat) => (
                   <label key={cat} className="flex items-center gap-3 cursor-pointer group">
@@ -250,28 +250,28 @@ export function Catalog() {
 
             {/* Price Range */}
             <div className="mb-8">
-              <h3 className="font-label-bold uppercase text-on-surface-variant mb-4 tracking-wider">Prix (FCFA)</h3>
+              <h3 className="text-sm font-bold text-on-surface mb-3 uppercase tracking-wide">Prix (FCFA)</h3>
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2">
                   <div className="flex-1 relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-sm">Min</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-sm font-medium">Min</span>
                     <input 
                       type="number" 
                       placeholder="0" 
                       value={minPrice}
                       onChange={(e) => setMinPrice(e.target.value)}
-                      className="w-full bg-surface-container-low border border-outline-variant/50 rounded-lg py-2 pl-12 pr-2 focus:ring-2 focus:ring-primary focus:border-primary text-body-sm text-right transition-all" 
+                      className="w-full bg-surface-container-low border border-outline-variant/50 rounded-lg py-2 pl-10 pr-2 focus:ring-2 focus:ring-primary focus:border-primary text-body-sm transition-all" 
                     />
                   </div>
                   <span className="text-on-surface-variant">-</span>
                   <div className="flex-1 relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-sm">Max</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-body-sm font-medium">Max</span>
                     <input 
                       type="number" 
                       placeholder="100000" 
                       value={maxPrice}
                       onChange={(e) => setMaxPrice(e.target.value)}
-                      className="w-full bg-surface-container-low border border-outline-variant/50 rounded-lg py-2 pl-12 pr-2 focus:ring-2 focus:ring-primary focus:border-primary text-body-sm text-right transition-all" 
+                      className="w-full bg-surface-container-low border border-outline-variant/50 rounded-lg py-2 pl-11 pr-2 focus:ring-2 focus:ring-primary focus:border-primary text-body-sm transition-all" 
                     />
                   </div>
                 </div>
@@ -280,9 +280,9 @@ export function Catalog() {
 
             {/* Verification Status */}
             <div className="mb-8">
-              <h3 className="font-label-bold uppercase text-on-surface-variant mb-4 tracking-wider">Confiance</h3>
-              <label className="flex items-start gap-3 cursor-pointer group p-3 bg-surface-container-low/50 rounded-lg border border-outline-variant/30 hover:border-primary/50 transition-colors">
-                <div className="relative flex items-center justify-center w-5 h-5 mt-0.5 border border-outline rounded bg-surface group-hover:border-primary transition-colors shrink-0">
+              <h3 className="text-sm font-bold text-on-surface mb-3 uppercase tracking-wide">Confiance</h3>
+              <label className="flex items-center gap-3 cursor-pointer group p-3 bg-surface-container-low/50 rounded-lg border border-outline-variant/30 hover:border-primary/50 transition-colors">
+                <div className="relative flex items-center justify-center w-5 h-5 border border-outline rounded bg-surface group-hover:border-primary transition-colors shrink-0">
                   <input 
                     type="checkbox" 
                     className="peer sr-only" 
@@ -292,19 +292,19 @@ export function Catalog() {
                   <span className="material-symbols-outlined text-[16px] text-on-primary absolute opacity-0 peer-checked:opacity-100 transition-opacity peer-checked:bg-primary rounded-[3px] inset-[1px] flex items-center justify-center">check</span>
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-body-sm font-semibold text-on-surface">Vendeurs Vérifiés</span>
-                  <span className="text-body-sm text-on-surface-variant text-[12px] leading-tight mt-1">Uniquement les marchands approuvés par Elevate.</span>
+                  <span className="text-body-sm font-bold text-on-surface">Vendeurs Vérifiés</span>
+                  <span className="text-body-sm text-on-surface-variant text-[11px] leading-snug mt-0.5">Uniquement les marchands approuvés par Elevate.</span>
                 </div>
               </label>
             </div>
 
             {/* Rating */}
             <div>
-              <h3 className="font-label-bold uppercase text-on-surface-variant mb-4 tracking-wider">Avis minimum</h3>
-              <div className="flex flex-col gap-2">
+              <h3 className="text-sm font-bold text-on-surface mb-3 uppercase tracking-wide">Avis minimum</h3>
+              <div className="flex flex-col gap-3">
                 {[4, 5].map((rating) => (
                   <label key={rating} className="flex items-center gap-3 cursor-pointer group">
-                    <div className="relative flex items-center justify-center w-5 h-5 rounded-full border border-outline bg-surface group-hover:border-primary transition-colors">
+                    <div className="relative flex items-center justify-center w-5 h-5 rounded-full border border-outline bg-surface group-hover:border-primary transition-colors shrink-0">
                       <input 
                         type="radio" 
                         name="rating" 
@@ -314,13 +314,13 @@ export function Catalog() {
                       />
                       <div className="w-2.5 h-2.5 rounded-full bg-primary opacity-0 peer-checked:opacity-100 transition-opacity"></div>
                     </div>
-                    <div className="flex items-center text-tertiary-container gap-0.5">
+                    <div className="flex flex-wrap items-center text-tertiary-container gap-0.5 mt-1">
                       {Array(5).fill(0).map((_, i) => (
-                        <span key={i} className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: i < rating ? "'FILL' 1" : "" }}>
+                        <span key={i} className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: i < rating ? "'FILL' 1" : "" }}>
                           star
                         </span>
                       ))}
-                      {rating < 5 && <span className="text-body-sm text-on-surface ml-2">&amp; plus</span>}
+                      {rating < 5 && <span className="text-body-sm text-on-surface ml-1 whitespace-nowrap">&amp; plus</span>}
                     </div>
                   </label>
                 ))}
